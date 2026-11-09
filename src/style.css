@@ -236,6 +236,31 @@ a {
   padding: 2px 5px;
   border-radius: 3px;
 }
+.input-guide {
+  margin: -2px 0 13px;
+  padding: 12px 14px;
+  border-right: 3px solid #6d9b89;
+  border-radius: 7px;
+  background: #f5f8f6;
+  color: #566b65;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.input-guide p {
+  margin: 0;
+}
+.input-guide p + p {
+  margin-top: 6px;
+}
+.input-guide code {
+  display: inline-block;
+  padding: 1px 6px;
+  border: 1px solid #dce6e1;
+  border-radius: 4px;
+  background: #fff;
+  color: #214c3f;
+  font-weight: 700;
+}
 fieldset {
   padding: 0;
   border: 0;
@@ -562,6 +587,10 @@ footer div {
     align-items: flex-start;
     flex-direction: column;
     gap: 0;
+  }
+  .input-guide {
+    padding: 11px 12px;
+    font-size: 12px;
   }
   .field textarea {
     min-height: 138px;
