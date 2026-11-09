@@ -1,82 +1,137 @@
 # Ruqyah Studio — استوديو الرقية
 
-A free, **non-commercial** Quran verse audio assembler. Built as a **Vite static frontend + Cloudflare Pages Function** so it can be deployed from a GitHub repository to Cloudflare Pages. No Python server, paid cloud account, database, or API key is required for the app's basic functionality.
+أداة عربية لتجميع آيات قرآنية مختارة في ملف MP3 واحد. يختار المستخدم القارئ والآيات وسرعة التشغيل والفاصل بينها، ثم ترتّب الأداة الآيات حسب المصحف وتعالج الصوت داخل المتصفح.
 
-## Features
+بُني المشروع باستخدام **Vite** و**Cloudflare Pages Functions**، ولا يحتاج إلى قاعدة بيانات أو مفتاح API.
 
-- Five reciters: Alafasy, Husary, Minshawi, Abdul Basit, Sudais. Abdul Basit and Sudais use verified EveryAyah verse files because their Al Quran Cloud paths can return 403; the other configured CDN sources remain available as fallbacks.
-- Specify `surah:ayah` or `surah:first-last`, one or more per line, e.g. `1:1-7` and `2:255`.
-- Validates all references, removes duplicates, and sorts in **mushaf order**.
-- Defaults to **1.25×**, also offers **1×** and **1.5×**.
-- Optional silence between verses: 0, 0.5, or 1 second.
-- Creates **one downloadable MP3**. The `atempo` FFmpeg filter changes speed without intentionally changing pitch.
-- Mobile-friendly Arabic RTL interface.
-- Browser-side FFmpeg.WASM audio processing; Cloudflare Functions only streams original per-verse audio from Al Quran Cloud and EveryAyah.
+## المزايا
 
-## 1. Publish from GitHub to Cloudflare Pages
+- خمسة قرّاء: مشاري العفاسي، محمود الحصري، محمد المنشاوي، عبد الباسط عبد الصمد، وعبد الرحمن السديس.
+- إدخال آية واحدة بصيغة `2:255` أو نطاق متتالٍ بصيغة `1:1-7`.
+- قبول عدة اختيارات، كل اختيار في سطر مستقل.
+- التحقق من أرقام السور والآيات، وحذف التكرارات، والترتيب حسب المصحف.
+- عرض الملخص باسم السورة الحقيقي وأرقام الآيات، مع وضع كل سورة في سطر مستقل.
+- سرعات تشغيل `1×` و`1.25×` و`1.5×`.
+- فاصل اختياري بين الآيات: بدون فاصل، نصف ثانية، أو ثانية.
+- إنشاء ملف MP3 واحد للاستماع والتنزيل.
+- معالجة الصوت داخل المتصفح باستخدام FFmpeg.WASM؛ الملف النهائي لا يُرفع إلى خادم.
+- واجهة عربية RTL متجاوبة ومهيأة للهواتف.
+- زر لإلغاء العملية، مع مهلة للطلبات وحدود لحجم الملفات واستهلاك الذاكرة.
 
-1. Create a **new GitHub repository** named e.g. `ruqyah-studio`.
-2. Upload **the contents of this folder** (not the outer ZIP folder) into the repository, then commit to `main`. This includes the top-level `functions/api/audio.js` directory.
-3. Open **Cloudflare dashboard → Workers & Pages → Create → Pages → Connect to Git**; select your GitHub repository.
-4. Use these build settings:
+## طريقة إدخال الآيات
 
-   | Setting                | Value           |
-   | ---------------------- | --------------- |
-   | Framework preset       | Vite (or None)  |
-   | Production branch      | `main`          |
-   | Build command          | `npm run build` |
-   | Build output directory | `dist`          |
-   | Root directory         | `/`             |
+اكتب رقم السورة، ثم نقطتين، ثم رقم الآية:
 
-5. Deploy. Cloudflare provisions a URL like `https://ruqyah-studio.pages.dev` (the actual address depends on availability).
+```text
+2:255
+```
 
-**Important:** use Cloudflare **Pages with Git integration**, not only GitHub Pages. This app includes a Cloudflare Pages Function under `/functions/api/audio.js` that handles cross-origin audio streaming. GitHub is the repository, and Cloudflare Pages is the running host.
+لاختيار آيات متتالية، أضف شرطة بين أول آية وآخر آية:
 
-## 2. Run locally
+```text
+1:1-7
+```
 
-Requirements: Node.js 20+ and npm.
+يمكن الجمع بين عدة اختيارات، كل اختيار في سطر:
+
+```text
+1:1-7
+2:255
+2:285-286
+113:1-5
+114:1-6
+```
+
+ويظهر الملخص بهذا الشكل:
+
+```text
+سورة الفاتحة: الآيات 1–7
+سورة البقرة: الآيات 255، 285–286
+سورة الفلق: الآيات 1–5
+سورة الناس: الآيات 1–6
+```
+
+## التشغيل محليًا
+
+المتطلبات: **Node.js 20 أو أحدث** وnpm.
+
+لتشغيل الواجهة فقط:
 
 ```bash
 npm install
 npm run dev
 ```
 
-The frontend starts at `http://localhost:5173`, but the `/api/audio` Cloudflare Function is **not emulated by Vite alone**. To test the complete audio path locally, use Wrangler with the built project:
+ثم افتح الرابط الذي يظهر في الطرفية، وغالبًا يكون `http://localhost:5173`.
+
+لتشغيل المشروع كاملًا، بما في ذلك مسار الصوت في Cloudflare Function:
 
 ```bash
 npm run build
 npx wrangler pages dev dist
 ```
 
-Then open the URL Wrangler prints (usually `http://localhost:8788`). Wrangler reads the `functions/` directory beside `dist`.
+ثم افتح الرابط الذي يعرضه Wrangler، وغالبًا يكون `http://localhost:8788`.
 
-To test verse references without external dependencies:
+## الاختبارات والبناء
 
 ```bash
 npm test
+npm run build
 ```
 
-## 3. How it works
+تغطي الاختبارات تحليل مراجع الآيات، والترتيب، وأسماء السور، وتجميع النطاقات، والتحقق من Cloudflare Function ومصادر الصوت الاحتياطية وحدود حجم الملفات.
 
-1. The browser parses verse references using the 114 surah lengths (`src/quran.js`). Quran verses are mapped to absolute ayah indexes **1–6236**.
-2. `GET /api/audio?edition=ar.alafasy&ayah=262` in `functions/api/audio.js` streams the corresponding public audio CDN file. The Function has a hardcoded approved-reciter list; it never proxies arbitrary URLs.
-3. The browser lazily loads `@ffmpeg/ffmpeg` plus the single-thread `@ffmpeg/core` WebAssembly runtime (about 30 MB) from jsDelivr. It appends the source files in order, inserts optional silent MP3 segments, applies `atempo` and encodes one MP3.
-4. A browser Blob URL is used for playback and downloading. The combined recording is **not uploaded** to the cloud.
+## النشر على Cloudflare Pages
 
-## Notes and limitations
+اربط هذا المستودع بمشروع Cloudflare Pages واستخدم الإعدادات التالية:
 
-- **Not yet verified end-to-end on a deployed Cloudflare Pages URL**. Unit tests validate the references and ordering; a live deploy test must confirm CDN availability, FFmpeg initialization and MP3 output on your target devices.
-- FFmpeg.WASM can use significant browser memory. The app therefore processes downloads sequentially, enforces per-file and total-size limits, and allows cancellation. The maximum is **40 verses on desktop and 25 on compact/mobile screens**.
-- The app requires a stable internet connection to load audio and the FFmpeg browser runtime. Initial compilation can be noticeably slow on phones.
-- Some CDN editions and bitrates can be temporarily unavailable; if a reciter's URL fails, try another and inspect the network response.
-- **Non-commercial use does not remove the requirement to respect reciters' rights**. Al Quran Cloud's published terms allow personal and educational streaming, downloading and free non-commercial redistribution, while recitations remain owned by the reciters or their estates. Attribute the source and review the [provider's current terms](https://alquran.cloud/terms-and-conditions) before public redistribution.
-- This is a tool for Quran listening and is not a substitute for medical care. Selection names do not assert a proven medical treatment.
+| الإعداد                | القيمة          |
+| ---------------------- | --------------- |
+| Framework preset       | Vite أو None    |
+| Production branch      | `main`          |
+| Build command          | `npm run build` |
+| Build output directory | `dist`          |
+| Root directory         | `/`             |
 
-## Sources
+يجب استخدام **Cloudflare Pages** وليس GitHub Pages فقط، لأن المشروع يعتمد على الدالة الموجودة في `functions/api/audio.js` لجلب ملفات الصوت ومعالجة قيود CORS.
 
-- [Al Quran Cloud CDN: ayah audio URLs and bitrate identifiers](https://alquran.cloud/cdn)
-- [Al Quran Cloud terms](https://alquran.cloud/terms-and-conditions)
-- [EveryAyah verse-by-verse audio](https://everyayah.com/)
-- [Cloudflare Pages build configuration](https://developers.cloudflare.com/pages/configuration/build-configuration/)
-- [Cloudflare Pages Functions](https://developers.cloudflare.com/pages/functions/get-started/)
-- [ffmpeg.wasm usage](https://ffmpegwasm.netlify.app/docs/getting-started/usage/)
+## طريقة العمل
+
+1. يحلل المتصفح مراجع الآيات اعتمادًا على عدد آيات السور الـ114 في `src/quran.js`.
+2. تحول كل آية إلى رقمها العام من 1 إلى 6236.
+3. تجلب `functions/api/audio.js` ملف الآية من مصدر صوت معتمد؛ ولا تقبل الدالة روابط خارجية يحددها المستخدم.
+4. يستخدم عبد الباسط والسديس ملفات EveryAyah التي تم التحقق منها، مع الإبقاء على مصادر CDN الأخرى كخيارات احتياطية.
+5. يحمّل المتصفح FFmpeg.WASM عند الحاجة، ثم يضيف الفواصل ويضبط السرعة وينشئ ملف MP3 واحدًا.
+6. يتوفر الناتج عبر رابط مؤقت داخل المتصفح للاستماع أو التنزيل.
+
+## حدود الاستخدام
+
+- الحد الأقصى 40 آية على سطح المكتب و25 آية على الشاشات الصغيرة.
+- قد تحتاج عملية إنشاء الملف إلى وقت وذاكرة ملحوظين، خصوصًا عند اختيار آيات طويلة أو عند الاستخدام على هاتف قديم.
+- يجب إبقاء الصفحة مفتوحة حتى يكتمل إنشاء الملف.
+- يحتاج المشروع إلى اتصال بالإنترنت لجلب التلاوات وتحميل محرك FFmpeg أول مرة.
+- قد تتأثر بعض المصادر الخارجية بانقطاع مؤقت؛ تحاول الدالة استخدام مصدر احتياطي عند توفره.
+
+## هيكل المشروع
+
+```text
+functions/api/audio.js   Cloudflare Function لجلب الصوت
+src/main.js              منطق الواجهة والتنزيل وإنشاء MP3
+src/quran.js             بيانات السور وتحليل مراجع الآيات
+src/style.css             تصميم الواجهة وتنسيق الموبايل
+tests/                    اختبارات الآيات ومسار الصوت
+index.html                الصفحة الرئيسية
+```
+
+## المصادر والحقوق
+
+- [Al Quran Cloud CDN](https://alquran.cloud/cdn)
+- [شروط Al Quran Cloud](https://alquran.cloud/terms-and-conditions)
+- [EveryAyah](https://everyayah.com/)
+- [Cloudflare Pages Functions](https://developers.cloudflare.com/pages/functions/)
+- [ffmpeg.wasm](https://ffmpegwasm.netlify.app/)
+
+حقوق التلاوات والتسجيلات محفوظة للقراء وأصحابها. راجع شروط المصادر قبل إعادة نشر التسجيلات أو استخدامها خارج نطاق الاستماع الشخصي.
+
+هذه الأداة مخصصة لتجميع التلاوات والاستماع إليها، وليست بديلًا عن الاستشارة أو الرعاية الطبية.
