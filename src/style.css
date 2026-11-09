@@ -36,6 +36,7 @@ a {
 }
 .app-shell {
   min-height: 100vh;
+  overflow-x: clip;
 }
 .masthead {
   background: #0c2933;
@@ -514,17 +515,25 @@ footer div {
   display: none !important;
 }
 @media (max-width: 800px) {
+  body {
+    background: #f3f5f1;
+  }
   .workspace {
     grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 46px;
   }
   .hero {
-    padding-top: 35px;
+    padding-top: 31px;
+    padding-bottom: 28px;
   }
   .panel {
-    padding: 23px;
+    padding: 22px;
+    box-shadow: 0 3px 16px #234a4312;
   }
   .masthead {
-    padding: 17px 24px;
+    justify-content: center;
+    padding: 14px 20px;
   }
   .device-note {
     display: block;
@@ -561,27 +570,53 @@ footer div {
   .masthead {
     padding-inline: 14px;
   }
+  .brand {
+    gap: 10px;
+  }
+  .brand strong {
+    font-size: 18px;
+  }
   .brand-symbol {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+    font-size: 28px;
   }
   .hero {
-    padding-top: 27px;
-    padding-bottom: 25px;
+    padding-top: 25px;
+    padding-bottom: 23px;
+    text-align: center;
+  }
+  .eyebrow {
+    justify-content: center;
+    font-size: 12px;
   }
   .hero h1 {
+    margin-top: 11px;
+    font-size: clamp(27px, 8.2vw, 34px);
     letter-spacing: -0.7px;
-    line-height: 1.45;
+    line-height: 1.4;
+  }
+  .hero p {
+    font-size: 14px;
+    line-height: 1.85;
   }
   .workspace {
     margin-bottom: 40px;
   }
   .panel {
-    padding: 19px 16px;
-    border-radius: 13px;
+    padding: 19px 15px;
+    border-radius: 16px;
   }
   .panel-heading {
     margin-bottom: 21px;
+  }
+  .panel h2 {
+    font-size: 18px;
+  }
+  .step {
+    width: 31px;
+    height: 31px;
   }
   .label-row {
     align-items: flex-start;
@@ -589,15 +624,30 @@ footer div {
     gap: 0;
   }
   .input-guide {
-    padding: 11px 12px;
-    font-size: 12px;
+    padding: 11px;
+    border-right-width: 2px;
+    font-size: 12.5px;
+    line-height: 1.75;
   }
   .field textarea {
     min-height: 138px;
     font-size: 16px;
   }
   .field select {
+    height: 52px;
     font-size: 16px;
+  }
+  .field {
+    margin-bottom: 21px;
+  }
+  .chips {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .chip {
+    width: 100%;
+    min-height: 44px;
   }
   .segment {
     gap: 3px;
@@ -612,5 +662,34 @@ footer div {
   }
   .summary-grid > div {
     padding: 16px 14px;
+  }
+  .summary-grid strong {
+    font-size: 27px;
+  }
+  .order-preview {
+    margin-top: 18px;
+    padding-top: 16px;
+  }
+  .order-preview p {
+    padding: 11px 12px;
+    border-radius: 9px;
+    background: #f7f9f7;
+    font-size: 12.5px;
+    line-height: 2.05;
+  }
+  .result-blank {
+    padding-top: 8px;
+  }
+  .music-icon {
+    width: 58px;
+    height: 58px;
+    font-size: 31px;
+  }
+  .info-box {
+    padding: 14px 15px;
+  }
+  footer {
+    padding: 24px 16px 28px;
+    line-height: 2;
   }
 }
