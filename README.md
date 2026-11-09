@@ -11,7 +11,7 @@ A free, **non-commercial** Quran verse audio assembler. Built as a **Vite static
 - Optional silence between verses: 0, 0.5, or 1 second.
 - Creates **one downloadable MP3**. The `atempo` FFmpeg filter changes speed without intentionally changing pitch.
 - Mobile-friendly Arabic RTL interface.
-- Browser-side FFmpeg.WASM audio processing; Cloudflare Functions only streams original per-verse audio from Al Quran Cloud.
+- Browser-side FFmpeg.WASM audio processing; Cloudflare Functions only streams original per-verse audio from Al Quran Cloud and EveryAyah.
 
 ## 1. Publish from GitHub to Cloudflare Pages
 
