@@ -72,13 +72,6 @@ a {
   opacity: 0.72;
   margin-top: 2px;
 }
-.header-pill {
-  font-size: 12px;
-  padding: 8px 12px;
-  border: 1px solid #4c656e;
-  border-radius: 24px;
-  color: #c5d5d3;
-}
 .hero {
   max-width: 1160px;
   margin: auto;
@@ -500,9 +493,6 @@ footer div {
   }
   .hero {
     padding-top: 35px;
-  }
-  .header-pill {
-    display: none;
   }
   .panel {
     padding: 23px;
