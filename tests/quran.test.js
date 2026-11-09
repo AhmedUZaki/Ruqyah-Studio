@@ -1,12 +1,26 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { AYAH_COUNTS, parseSelection, toGlobalNumber } from "../src/quran.js";
+import {
+  AYAH_COUNTS,
+  SURAH_NAMES,
+  parseSelection,
+  summarizeSelection,
+  toGlobalNumber,
+} from "../src/quran.js";
 
 test("114 surahs and 6236 ayahs", () => {
   assert.equal(AYAH_COUNTS.length, 114);
+  assert.equal(SURAH_NAMES.length, 114);
   assert.equal(
     AYAH_COUNTS.reduce((a, b) => a + b, 0),
     6236,
+  );
+});
+test("summary groups verses by surah name and compresses ranges", () => {
+  const selection = parseSelection("114:1-3, 2:255, 1:1-7, 2:285-286");
+  assert.equal(
+    summarizeSelection(selection),
+    "سورة الفاتحة: الآيات 1–7\nسورة البقرة: الآيات 255، 285–286\nسورة الناس: الآيات 1–3",
   );
 });
 test("mushaf order and deduplication", () => {

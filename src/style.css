@@ -363,8 +363,9 @@ fieldset {
 }
 .order-preview p {
   margin: 0;
-  direction: ltr;
+  direction: rtl;
   text-align: right;
+  white-space: pre-line;
   overflow-wrap: anywhere;
   line-height: 2;
   color: #63797a;
