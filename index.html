@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0c2330" />
+    <meta
+      name="description"
+      content="Ruqyah Studio — أنشئ ملف MP3 من آيات قرآنية مختارة بصوت قارئك المفضل وبالترتيب المصحفي."
+    />
+    <title>Ruqyah Studio | استوديو الرقية</title>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="masthead">
+        <div class="brand">
+          <div class="brand-symbol" aria-hidden="true">۞</div>
+          <div>
+            <strong lang="en" dir="ltr">Ruqyah Studio</strong
+            ><span>استوديو الرقية</span>
+          </div>
+        </div>
+        <span class="header-pill">مشروع مجاني وغير تجاري</span>
+      </header>
+      <main>
+        <section class="hero">
+          <div class="eyebrow">
+            <span class="dot"></span> آيات قرآنية مختارة — ملف واحد
+          </div>
+          <h1>صمّم تلاوتك القرآنية <em>بسهولة وهدوء.</em></h1>
+          <p>
+            اختر القارئ والآيات والسرعة. نرتّب الآيات حسب المصحف، ثم ندمجها في
+            ملف MP3 يمكنك الاستماع إليه وتنزيله.
+          </p>
+        </section>
+        <div class="workspace">
+          <section class="panel controls" aria-labelledby="form-title">
+            <div class="panel-heading">
+              <div>
+                <span class="step">01</span>
+                <h2 id="form-title">إعداد التلاوة</h2>
+              </div>
+              <span class="helper">جميع الخيارات قابلة للتعديل</span>
+            </div>
+            <form id="generator-form">
+              <label class="field" for="reciter"
+                ><span>القارئ</span
+                ><select id="reciter" name="reciter">
+                  <option value="ar.alafasy">مشاري راشد العفاسي</option>
+                  <option value="ar.husary">محمود خليل الحصري</option>
+                  <option value="ar.minshawi">محمد صديق المنشاوي</option>
+                  <option value="ar.abdulbasit">عبد الباسط عبد الصمد</option>
+                  <option value="ar.sudais">عبد الرحمن السديس</option>
+                </select></label
+              >
+              <div class="field">
+                <div class="label-row">
+                  <label for="verses">الآيات المختارة</label
+                  ><span class="helper">سورة:آية أو سورة:بداية-نهاية</span>
+                </div>
+                <textarea
+                  id="verses"
+                  name="verses"
+                  rows="6"
+                  dir="ltr"
+                  spellcheck="false"
+                >
+1:1-7
+2:255
+2:285-286
+113:1-5
+114:1-6</textarea
+                >
+                <div class="chips">
+                  <button type="button" class="chip" data-preset="fatiha">
+                    الفاتحة</button
+                  ><button type="button" class="chip" data-preset="kursi">
+                    آية الكرسي</button
+                  ><button type="button" class="chip" data-preset="muawwidhat">
+                    المعوّذتان</button
+                  ><button type="button" class="chip" id="clear-verses">
+                    مسح
+                  </button>
+                </div>
+                <p class="field-note">
+                  كل سطر آية أو نطاق، مثل <code dir="ltr">2:255</code> أو
+                  <code dir="ltr">1:1-7</code>. التكرارات تُزال والآيات تُرتّب
+                  تلقائيًا.
+                </p>
+              </div>
+              <fieldset class="field">
+                <legend>سرعة التلاوة</legend>
+                <div class="segment">
+                  <label
+                    ><input type="radio" name="speed" value="1" /><span
+                      >1×</span
+                    ></label
+                  ><label
+                    ><input
+                      type="radio"
+                      name="speed"
+                      value="1.25"
+                      checked
+                    /><span>1.25× <small>افتراضي</small></span></label
+                  ><label
+                    ><input type="radio" name="speed" value="1.5" /><span
+                      >1.5×</span
+                    ></label
+                  >
+                </div>
+                <p class="field-note">
+                  تُطبَّق السرعة مع الحفاظ قدر الإمكان على طبقة الصوت الأصلية.
+                </p>
+              </fieldset>
+              <fieldset class="field">
+                <legend>الفاصل بين الآيات</legend>
+                <div class="segment">
+                  <label
+                    ><input type="radio" name="gap" value="0" checked /><span
+                      >بدون</span
+                    ></label
+                  ><label
+                    ><input type="radio" name="gap" value="0.5" /><span
+                      >نصف ثانية</span
+                    ></label
+                  ><label
+                    ><input type="radio" name="gap" value="1" /><span
+                      >ثانية</span
+                    ></label
+                  >
+                </div>
+              </fieldset>
+              <button class="primary-button" type="submit" id="generate">
+                <span id="generate-text">إنشاء ملف MP3</span
+                ><span aria-hidden="true">←</span>
+              </button>
+              <p class="device-note" id="device-note">
+                لأفضل أداء على الهاتف، أنشئ مقاطع قصيرة وأبقِ الصفحة مفتوحة
+                أثناء التجهيز.
+              </p>
+              <p id="validation" class="validation" role="alert" hidden></p>
+            </form>
+          </section>
+          <aside class="side-panel">
+            <section class="panel summary">
+              <div class="panel-heading">
+                <div>
+                  <span class="step">02</span>
+                  <h2>ملخص التلاوة</h2>
+                </div>
+              </div>
+              <div class="summary-grid">
+                <div><span>عدد الآيات</span><strong id="count">—</strong></div>
+                <div>
+                  <span>سرعة التشغيل</span
+                  ><strong id="current-speed" dir="ltr">1.25×</strong>
+                </div>
+              </div>
+              <div class="order-preview">
+                <span>الترتيب المصحفي</span>
+                <p id="order">—</p>
+              </div>
+            </section>
+            <section class="panel result">
+              <div class="panel-heading">
+                <div>
+                  <span class="step">03</span>
+                  <h2>الملف النهائي</h2>
+                </div>
+              </div>
+              <div class="result-blank" id="placeholder">
+                <span class="music-icon" aria-hidden="true">♫</span
+                ><strong>التلاوة جاهزة للتجهيز</strong>
+                <p>بعد الإنشاء ستجد هنا مشغّل الصوت ورابط التحميل.</p>
+              </div>
+              <div id="progress-area" class="progress-area" hidden>
+                <div class="spinner" aria-hidden="true"></div>
+                <p id="progress-text" role="status" aria-live="polite">
+                  جارٍ التحضير…
+                </p>
+                <progress id="progress" value="0" max="100"></progress
+                ><button type="button" id="cancel" class="cancel-button" hidden>
+                  إلغاء العملية
+                </button>
+              </div>
+              <div id="output-area" hidden>
+                <audio id="player" controls preload="metadata"></audio
+                ><a
+                  id="download"
+                  class="download-button"
+                  download="ruqyah-studio.mp3"
+                  >تنزيل ملف MP3 ↓</a
+                >
+                <p class="field-note">
+                  يبقى الملف في متصفحك حتى تقوم بإغلاق الصفحة.
+                </p>
+              </div>
+            </section>
+            <div class="info-box">
+              <span aria-hidden="true">✧</span>
+              <p>
+                تُعالَج الملفات الصوتية محليًا داخل متصفحك. لن تحتاج إلى حساب أو
+                رفع تسجيلك إلى خادم لمعالجته.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </main>
+      <footer>
+        <div>Ruqyah Studio · للاستعمال الشخصي وغير التجاري</div>
+        <div>
+          مصدر التلاوات:
+          <a
+            href="https://alquran.cloud/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Al Quran Cloud</a
+          >
+          — جميع حقوق التسجيلات لأصحابها.
+        </div>
+        <p>
+          هذا المشروع لتجميع التلاوات والاستماع إليها، وليس بديلًا عن الاستشارة
+          أو الرعاية الطبية.
+        </p>
+      </footer>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
