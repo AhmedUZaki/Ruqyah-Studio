@@ -238,7 +238,7 @@ async function buildMp3(engine, verses, reciter, { speed, gap }, signal) {
     usedFiles.push("concat.txt");
     const output = "ruqyah-output.mp3";
     usedFiles.push(output);
-    setProgress("دمج الآيات وتسريع التلاوة مع الحفاظ على طبقة الصوت…", 83);
+    setProgress("دمج الآيات وضبط سرعة التشغيل…", 83);
     if (signal.aborted) throw abortError();
     const code = await engine.exec([
       "-f",
@@ -267,7 +267,7 @@ async function buildMp3(engine, verses, reciter, { speed, gap }, signal) {
     const data = await engine.readFile(output);
     if (!(data instanceof Uint8Array) || data.byteLength < 300)
       throw new Error("تعذر الحصول على ملف MP3 صالح.");
-    setProgress("تم إعداد التلاوة بنجاح.", 100);
+    setProgress("اكتمل إنشاء ملف MP3.", 100);
     return new Blob([data.slice()], { type: "audio/mpeg" });
   } finally {
     await cleanup();

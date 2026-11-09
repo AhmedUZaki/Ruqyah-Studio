@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#0c2330" />
     <meta
       name="description"
-      content="Ruqyah Studio — أنشئ ملف MP3 من آيات قرآنية مختارة بصوت قارئك المفضل وبالترتيب المصحفي."
+      content="أداة لتجميع آيات قرآنية مختارة في ملف MP3 واحد، مع ترتيبها حسب المصحف واختيار القارئ وسرعة التشغيل."
     />
     <title>Ruqyah Studio | استوديو الرقية</title>
   </head>
@@ -25,12 +25,12 @@
       <main>
         <section class="hero">
           <div class="eyebrow">
-            <span class="dot"></span> آيات قرآنية مختارة — ملف واحد
+            <span class="dot"></span> تجميع آيات مختارة في ملف صوتي واحد
           </div>
-          <h1>صمّم تلاوتك القرآنية <em>بسهولة وهدوء.</em></h1>
+          <h1>أنشئ ملفًا صوتيًا <em>من الآيات التي تختارها.</em></h1>
           <p>
-            اختر القارئ والآيات والسرعة. نرتّب الآيات حسب المصحف، ثم ندمجها في
-            ملف MP3 يمكنك الاستماع إليه وتنزيله.
+            حدّد القارئ والآيات وسرعة التشغيل والفاصل بينها. ترتّب الأداة الآيات
+            حسب المصحف، ثم تجمعها في ملف MP3 للاستماع أو التنزيل.
           </p>
         </section>
         <div class="workspace">
@@ -40,7 +40,7 @@
                 <span class="step">01</span>
                 <h2 id="form-title">إعداد التلاوة</h2>
               </div>
-              <span class="helper">جميع الخيارات قابلة للتعديل</span>
+              <span class="helper">يمكن تعديل الإعدادات قبل الإنشاء</span>
             </div>
             <form id="generator-form">
               <label class="field" for="reciter"
@@ -83,9 +83,9 @@
                   </button>
                 </div>
                 <p class="field-note">
-                  كل سطر آية أو نطاق، مثل <code dir="ltr">2:255</code> أو
-                  <code dir="ltr">1:1-7</code>. التكرارات تُزال والآيات تُرتّب
-                  تلقائيًا.
+                  اكتب في كل سطر آية أو نطاقًا، مثل
+                  <code dir="ltr">2:255</code> أو <code dir="ltr">1:1-7</code>.
+                  تحذف الأداة التكرارات وترتّب الآيات حسب المصحف.
                 </p>
               </div>
               <fieldset class="field">
@@ -109,7 +109,7 @@
                   >
                 </div>
                 <p class="field-note">
-                  تُطبَّق السرعة مع الحفاظ قدر الإمكان على طبقة الصوت الأصلية.
+                  تتغيّر سرعة التشغيل من دون تغيير مقصود لطبقة الصوت.
                 </p>
               </fieldset>
               <fieldset class="field">
@@ -135,8 +135,8 @@
                 ><span aria-hidden="true">←</span>
               </button>
               <p class="device-note" id="device-note">
-                لأفضل أداء على الهاتف، أنشئ مقاطع قصيرة وأبقِ الصفحة مفتوحة
-                أثناء التجهيز.
+                على الهاتف، اختر عددًا قليلًا من الآيات واترك الصفحة مفتوحة حتى
+                يكتمل إنشاء الملف.
               </p>
               <p id="validation" class="validation" role="alert" hidden></p>
             </form>
@@ -146,7 +146,7 @@
               <div class="panel-heading">
                 <div>
                   <span class="step">02</span>
-                  <h2>ملخص التلاوة</h2>
+                  <h2>ملخص الملف</h2>
                 </div>
               </div>
               <div class="summary-grid">
@@ -165,13 +165,13 @@
               <div class="panel-heading">
                 <div>
                   <span class="step">03</span>
-                  <h2>الملف النهائي</h2>
+                  <h2>ملف MP3</h2>
                 </div>
               </div>
               <div class="result-blank" id="placeholder">
                 <span class="music-icon" aria-hidden="true">♫</span
-                ><strong>التلاوة جاهزة للتجهيز</strong>
-                <p>بعد الإنشاء ستجد هنا مشغّل الصوت ورابط التحميل.</p>
+                ><strong>لم يُنشأ ملف بعد</strong>
+                <p>بعد ضبط الإعدادات، اضغط «إنشاء ملف MP3».</p>
               </div>
               <div id="progress-area" class="progress-area" hidden>
                 <div class="spinner" aria-hidden="true"></div>
@@ -192,22 +192,21 @@
                   >تنزيل ملف MP3 ↓</a
                 >
                 <p class="field-note">
-                  يبقى الملف في متصفحك حتى تقوم بإغلاق الصفحة.
+                  يتوفر الملف في هذه الصفحة حتى تغلقها أو تعيد تحميلها.
                 </p>
               </div>
             </section>
             <div class="info-box">
               <span aria-hidden="true">✧</span>
               <p>
-                تُعالَج الملفات الصوتية محليًا داخل متصفحك. لن تحتاج إلى حساب أو
-                رفع تسجيلك إلى خادم لمعالجته.
+                تجري معالجة الصوت داخل متصفحك، ولا يُرفع الملف النهائي إلى خادم.
               </p>
             </div>
           </aside>
         </div>
       </main>
       <footer>
-        <div>Ruqyah Studio · للاستعمال الشخصي وغير التجاري</div>
+        <div>Ruqyah Studio · أداة مجانية للاستخدام الشخصي وغير التجاري</div>
         <div>
           مصادر التلاوات الصوتية:
           <a
