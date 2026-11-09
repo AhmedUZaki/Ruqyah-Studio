@@ -4,7 +4,7 @@ A free, **non-commercial** Quran verse audio assembler. Built as a **Vite static
 
 ## Features
 
-- Five reciters: Alafasy, Husary, Minshawi, Abdul Basit, Sudais, with automatic failover to the provider's documented mirror.
+- Five reciters: Alafasy, Husary, Minshawi, Abdul Basit, Sudais. Abdul Basit and Sudais use verified EveryAyah verse files because their Al Quran Cloud paths can return 403; the other configured CDN sources remain available as fallbacks.
 - Specify `surah:ayah` or `surah:first-last`, one or more per line, e.g. `1:1-7` and `2:255`.
 - Validates all references, removes duplicates, and sorts in **mushaf order**.
 - Defaults to **1.25×**, also offers **1×** and **1.5×**.
@@ -76,6 +76,7 @@ npm test
 
 - [Al Quran Cloud CDN: ayah audio URLs and bitrate identifiers](https://alquran.cloud/cdn)
 - [Al Quran Cloud terms](https://alquran.cloud/terms-and-conditions)
+- [EveryAyah verse-by-verse audio](https://everyayah.com/)
 - [Cloudflare Pages build configuration](https://developers.cloudflare.com/pages/configuration/build-configuration/)
 - [Cloudflare Pages Functions](https://developers.cloudflare.com/pages/functions/get-started/)
 - [ffmpeg.wasm usage](https://ffmpegwasm.netlify.app/docs/getting-started/usage/)
